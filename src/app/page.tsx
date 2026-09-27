@@ -1,9 +1,12 @@
-
+import Hero from "@/components/Hero"
+import Bookpage from "./book/page"
 
 const Homepage = () => {
   return (
     <div>
-      <h1>Start Book Vibe Project </h1>
+      <Hero />
+      <Bookpage />
+
     </div>
   )
 }
