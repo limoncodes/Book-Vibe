@@ -1,20 +1,10 @@
 
 import Bookcard from "@/components/Bookcard"
 import { BookDataType } from "@/type/booktype"
+import bookdata from "../../../public/booksData.json"
 
-const getBook = async () => {
-    const response = await fetch("../../../public/booksData.json")
-
-    if (!response.ok) {
-        throw new Error("Failed to fetch book data")
-    }
-
-    const bookdata = await response.json()
-    return bookdata
-}
-
-const Bookpage = async () => {
-    const data = await getBook()
+const Bookpage = () => {
+    const data: BookDataType[] = bookdata
 
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 font-googlePro text-center mt-8">
@@ -25,11 +15,11 @@ const Bookpage = async () => {
                     Books
                 </h2>
 
-                <div className="w-16 h-1 bg-[#131313] mx-auto mt-4 rounded-full transition-all duration-500 hover:w-28" />
+                <div className="w-16 h-1 bg-[#131313] mx-auto mt-4 rounded-full" />
             </div>
 
             {/* Book Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8 my-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 my-12">
 
                 {data.map((book: BookDataType, index: number) => (
                     <div
