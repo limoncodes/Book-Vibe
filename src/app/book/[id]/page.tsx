@@ -5,24 +5,25 @@ import Readbutton from "@/components/Button/Readbutton";
 import WishlistButton from "@/components/Button/WishlistButton";
 
 const getBook = async (): Promise<BookDataType[]> => {
-  const response = await fetch(
-    "https://book-vibe-xqz9.vercel.app/booksData.json",
-    { cache: "no-store" }
-  );
+  try {
+    const response = await fetch(
+      "http://localhost:3000/booksData.json",
+      {
+        cache: "force-cache",
+      }
+    );
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch books: ${response.status}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch books");
+    }
+
+    const bookdata: BookDataType[] = await response.json();
+
+    return bookdata;
+  } catch (error) {
+    console.error("Book Fetch Error:", error);
+    return [];
   }
-
-  const contentType = response.headers.get("content-type");
-
-  if (!contentType?.includes("application/json")) {
-    throw new Error("API did not return valid JSON data");
-  }
-
-  const bookdata: BookDataType[] = await response.json();
-
-  return bookdata;
 };
 
 const BookDetails = async ({
