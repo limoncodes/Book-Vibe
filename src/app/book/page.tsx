@@ -3,7 +3,7 @@ import Bookcard from "@/components/Bookcard"
 import { BookDataType } from "@/type/booktype"
 
 const getBook = async () => {
-    const response = await fetch("/booksData.json")
+    const response = await fetch("../../../public/booksData.json")
 
     if (!response.ok) {
         throw new Error("Failed to fetch book data")
