@@ -3,8 +3,12 @@ import Bookcard from "@/components/Bookcard"
 import { BookDataType } from "@/type/booktype"
 
 const getBook = async () => {
+<<<<<<< HEAD
     // https://book-vibe-xqz9.vercel.app/
     const response = await fetch("https://book-vibe-xqz9.vercel.app/booksData.json")
+=======
+    const response = await fetch("https://book-vibe-xqz9-m3lvs9afs-limon9901s-projects.vercel.app/booksData.json")
+>>>>>>> 4fdb00c8d8c1cf60cfad66f04feacb388b7ed3ae
 
     if (!response.ok) {
         throw new Error("Failed to fetch book data")
