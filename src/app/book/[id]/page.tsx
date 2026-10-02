@@ -1,6 +1,8 @@
 import { BookDataType } from "@/type/booktype";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Readbutton from "@/components/Button/Readbutton";
+import WishlistButton from "@/components/Button/WishlistButton";
 
 const getBook = async (): Promise<BookDataType[]> => {
   const response = await fetch("http://localhost:3000/booksData.json");
@@ -143,13 +145,9 @@ const BookDetails = async ({
           {/* Buttons */}
           <div className="mt-7 flex gap-3">
 
-            <button className="rounded-md border border-gray-300 px-6 py-2.5 font-medium transition hover:bg-gray-100">
-              Read
-            </button>
+           <Readbutton book={book} />
 
-            <button className="rounded-md bg-[#4DB0CE] px-6 py-2.5 font-medium text-white transition hover:bg-[#3d9fbd]">
-              Wishlist
-            </button>
+            <WishlistButton  book={book}/>
 
           </div>
 

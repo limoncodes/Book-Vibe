@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navber from "@/components/Navber";
+import ThemeProvider from "./theme-provider";
+import { ToastContainer } from "react-toastify";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,13 +26,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-theme="white"
-      
+
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navber/>
+        <ThemeProvider>
+          <ToastContainer />
 
-        {children}
+          <Navber />
+
+          <main className="pt-[72px]">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
