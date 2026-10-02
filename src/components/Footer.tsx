@@ -7,7 +7,7 @@ const Footer = () => {
         </h2>
 
         <p className="text-sm text-gray-500">
-          © 2026 Limon Codes. All rights reserved.
+          © 2026 Limon . All rights reserved.
         </p>
       </div>
     </footer>
