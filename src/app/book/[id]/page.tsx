@@ -5,14 +5,22 @@ import Readbutton from "@/components/Button/Readbutton";
 import WishlistButton from "@/components/Button/WishlistButton";
 
 const getBook = async (): Promise<BookDataType[]> => {
-  
-  const response = await fetch("https://book-vibe-xqz9.vercel.app/booksData.json");
+  const response = await fetch(
+    "https://book-vibe-xqz9.vercel.app/booksData.json",
+    { cache: "no-store" }
+  );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch books");
+    throw new Error(`Failed to fetch books: ${response.status}`);
   }
 
-  const bookdata = await response.json();
+  const contentType = response.headers.get("content-type");
+
+  if (!contentType?.includes("application/json")) {
+    throw new Error("API did not return valid JSON data");
+  }
+
+  const bookdata: BookDataType[] = await response.json();
 
   return bookdata;
 };
@@ -22,10 +30,14 @@ const BookDetails = async ({
 }: {
   params: Promise<{ id: string }>;
 }) => {
-  const data = await getBook();
-
   const { id } = await params;
-  const idnumber = parseInt(id);
+  const idnumber = Number(id);
+
+  if (!Number.isInteger(idnumber)) {
+    notFound();
+  }
+
+  const data = await getBook();
 
   const book = data.find(
     (book: BookDataType) => book.bookId === idnumber
@@ -145,11 +157,8 @@ const BookDetails = async ({
 
           {/* Buttons */}
           <div className="mt-7 flex gap-3">
-
-           <Readbutton book={book} />
-
-            <WishlistButton  book={book}/>
-
+            <Readbutton book={book} />
+            <WishlistButton book={book} />
           </div>
 
         </div>
