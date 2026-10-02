@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { BsGraphUpArrow } from "react-icons/bs";
 
 import {
   FiMenu,
@@ -11,7 +12,6 @@ import {
   FiHome,
   FiBookOpen,
   FiList,
-  FiBook,
   FiLogIn,
   FiUserPlus,
 } from "react-icons/fi";
@@ -37,9 +37,9 @@ const Navber = () => {
       icon: <FiList />,
     },
     {
-      name: "Pages to Read",
-      path: "/pagesRead",
-      icon: <FiBook />,
+      name: "Graph",
+      path: "/chart",
+      icon: <BsGraphUpArrow />,
     },
   ];
 

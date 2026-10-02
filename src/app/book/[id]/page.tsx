@@ -5,7 +5,8 @@ import Readbutton from "@/components/Button/Readbutton";
 import WishlistButton from "@/components/Button/WishlistButton";
 
 const getBook = async (): Promise<BookDataType[]> => {
-  const response = await fetch("http://localhost:3000/booksData.json");
+  
+  const response = await fetch("https://book-vibe-xqz9.vercel.app/booksData.json");
 
   if (!response.ok) {
     throw new Error("Failed to fetch books");
