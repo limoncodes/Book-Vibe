@@ -5,25 +5,15 @@ import Readbutton from "@/components/Button/Readbutton";
 import WishlistButton from "@/components/Button/WishlistButton";
 
 const getBook = async (): Promise<BookDataType[]> => {
-  try {
-    const response = await fetch(
-      "http://localhost:3000/booksData.json",
-      {
-        cache: "force-cache",
-      }
-    );
+  const response = await fetch("http://localhost:3000/booksData.json");
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch books");
-    }
-
-    const bookdata: BookDataType[] = await response.json();
-
-    return bookdata;
-  } catch (error) {
-    console.error("Book Fetch Error:", error);
-    return [];
+  if (!response.ok) {
+    throw new Error("Failed to fetch books");
   }
+
+  const bookdata = await response.json();
+
+  return bookdata;
 };
 
 const BookDetails = async ({
@@ -31,14 +21,10 @@ const BookDetails = async ({
 }: {
   params: Promise<{ id: string }>;
 }) => {
-  const { id } = await params;
-  const idnumber = Number(id);
-
-  if (!Number.isInteger(idnumber)) {
-    notFound();
-  }
-
   const data = await getBook();
+
+  const { id } = await params;
+  const idnumber = parseInt(id);
 
   const book = data.find(
     (book: BookDataType) => book.bookId === idnumber
@@ -158,8 +144,11 @@ const BookDetails = async ({
 
           {/* Buttons */}
           <div className="mt-7 flex gap-3">
-            <Readbutton book={book} />
-            <WishlistButton book={book} />
+
+           <Readbutton book={book} />
+
+            <WishlistButton  book={book}/>
+
           </div>
 
         </div>
