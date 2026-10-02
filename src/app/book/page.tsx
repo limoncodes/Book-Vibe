@@ -2,7 +2,7 @@ import Bookcard from "@/components/Bookcard"
 import { BookDataType } from "@/type/booktype"
 
 const getBook = async () => {
-    const response = await fetch("http://localhost:3000/booksData.json")
+    const response = await fetch(`${process.env.LOCAL_HOST_URL}/booksData.json`)
     const bookdata = await response.json()
     return bookdata
 }
