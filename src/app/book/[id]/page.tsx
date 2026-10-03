@@ -5,7 +5,9 @@ import Readbutton from "@/components/Button/Readbutton";
 import WishlistButton from "@/components/Button/WishlistButton";
 
 const getBook = async (): Promise<BookDataType[]> => {
-  const response = await fetch(`${process.env.LOCAL_HOST_URL}/booksData.json`);
+  const response = await fetch(`${process.env.LOCAL_HOST_URL}/booksData.json`,{
+    cache:"no-store"
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch books");
